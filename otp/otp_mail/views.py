@@ -28,3 +28,15 @@ def send_otp(request):
         fail_silently=False,
     )
     return HttpResponse(last_otp_used);
+
+def check_otp(request):
+    email = request.GET.get('email')
+    otp = request.GET.get('otp')
+    actual_otp = User.objects.filter(email=email)
+    if actual_otp:
+        actual_otp = actual_otp.first().otp
+    else:
+        return HttpResponse('Email not registered')
+    if int(actual_otp) == int(otp):
+        return HttpResponse('Success')
+    return HttpResponse('Failure')

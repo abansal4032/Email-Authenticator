@@ -19,5 +19,6 @@ from otp_mail import views as view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^authenticate/', view.send_otp),
+    url(r'^authenticate/', view.check_otp),
+    url(r'^get_otp/', view.send_otp)
 ]
